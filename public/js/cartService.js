@@ -8,7 +8,14 @@ app.service("cartService", function($http) {
         // GET /api/items
 
         // TODO Make the HTTP request to the server and return a promise.
+        var responsePromise = $http.get("/api/items");
+        var dataPromise = responsePromise.then(function(response) {
+            return response.data;
+
+        });
+          return dataPromise;
     };
+
 
     // Call the Node Server API to add an item.
     // The item parameter will be an object, for example:
@@ -20,6 +27,10 @@ app.service("cartService", function($http) {
         // body -> { product: "...", price: ... }
 
         // TODO Make the HTTP request to the server and return a promise.
+        return $http.post("/api/items",item).then(function(response) {
+            return response.data;
+        });
+          return response;
     };
 
     // Call the Node Server API to delete an item.
@@ -30,6 +41,14 @@ app.service("cartService", function($http) {
         // DELETE /api/items/{ID}
 
         // TODO Make the HTTP request to the server and return a promise.
+        // return $http.delete("/api/items").then(function(response) {
+        //     return response.data;
+        // });
+        return $http.delete("/api/items/"+itemId).then(function(response) {
+              return response.data;
+
+        });
+          return response;
     };
 
 });
